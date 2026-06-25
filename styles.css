@@ -42,12 +42,154 @@
   color: #fff;
   font-size: 0.875rem;
   border-radius: 9999px;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, opacity 0.2s;
 }
 
 .header-cta:hover {
   background: #2563eb;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* App download modal */
+.app-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.app-modal[hidden] {
+  display: none;
+}
+
+.app-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 22, 35, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.app-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 24px 64px rgba(15, 22, 35, 0.18);
+  outline: none;
+}
+
+.app-modal__close {
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.app-modal__close:hover {
+  opacity: 0.85;
+}
+
+.app-modal__close-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.app-modal__body {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.app-modal__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f1623;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.app-modal__subtitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f1623;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+.app-modal__qr-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.25rem 1rem;
+}
+
+.app-modal__qr-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.app-modal__qr-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 6px;
+}
+
+.app-modal__qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.app-modal__qr-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #0f1623;
+}
+
+@media (max-width: 480px) {
+  .app-modal__body {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  .app-modal__qr-wrap {
+    gap: 0.75rem;
+    padding: 1rem 0.75rem;
+  }
+
+  .app-modal__qr-card {
+    width: 104px;
+    height: 104px;
+  }
 }
 
 /* Hero */

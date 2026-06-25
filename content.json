@@ -12,7 +12,16 @@
       { "text": "产品功能", "href": "#feature" },
       { "text": "会员权益", "href": "#membership" }
     ],
-    "suffixBtn": { "text": "去APP查看更多内容", "href": "#" }
+    "suffixBtn": { "text": "去APP查看更多内容", "href": "#" },
+    "modal": {
+      "title": "移步至FIRE记账App",
+      "subtitle": "查看/使用更多内容",
+      "background": "./assets/modal-bg.png",
+      "qrCodes": [
+        { "label": "IOS版", "image": "./assets/wechat-1.png" },
+        { "label": "安卓版", "image": "./assets/wechat-2.png" }
+      ]
+    }
   },
   "hero": {
     "icon": "./assets/192@3x_2.png",
@@ -21,12 +30,12 @@
     "androidBtn": {
       "text": "Android版下载",
       "icon": "./assets/Frame@2x.png",
-      "href": "#"
+      "href": "https://www.firebook.tech/base.apk"
     },
     "iosBtn": {
       "text": "iOS版下载",
       "icon": "./assets/Frame_2@2x.png",
-      "href": "#"
+      "href": "https://apps.apple.com/cn/app/fire%E8%AE%B0%E8%B4%A6%E6%9C%AC/id6742338689"
     },
     "phoneImage": "./assets/Iphone_Image@2x.png",
     "phoneImage2": "./assets/Iphone_Image_pop@2x.png"
@@ -144,8 +153,8 @@
     "wechat": "微信公众号: fire记账",
     "business": "商务合作: fire记账",
     "qrCodes": [
-      { "label": "专属客服一", "image": "./assets/wechat-1.png" },
-      { "label": "专属客服二", "image": "./assets/wechat-2.png" }
+      { "label": "专属客服一", "image": "./assets/kefu-1.png" },
+      { "label": "专属客服二", "image": "./assets/kefu-2.png" }
     ],
     "copyright": "© 2026 FIRE记账 版权所有"
   }

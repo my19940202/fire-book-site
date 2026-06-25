@@ -43,7 +43,7 @@ function renderHeader(data) {
           ${img(data.icon, data.logoText, 'header-logo w-[233px] h-[22px]')}
         </a>
         <nav class="hidden md:flex items-center gap-8">${tabs}</nav>
-        <a href="${escapeHtml(data.suffixBtn.href)}" class="header-cta shrink-0 rounded-[8px] p-[8px] bg-[linear-gradient(270deg,_rgba(109,_197,_255,_1)_0%,_rgba(53,_107,_255,_1)_90.87%)]">${escapeHtml(data.suffixBtn.text)}</a>
+        <button type="button" id="header-cta-btn" class="header-cta shrink-0 rounded-[8px] p-[8px] bg-[linear-gradient(270deg,_rgba(109,_197,_255,_1)_0%,_rgba(53,_107,_255,_1)_90.87%)]">${escapeHtml(data.suffixBtn.text)}</button>
       </div>
     </header>`;
 }
@@ -91,7 +91,8 @@ function renderFeature(data) {
         <div class="${highlightClass}">
           ${img(item.icon, item.title, 'feature-icon')}
           <div>
-            <h3 class="feature-title">${escapeHtml(item.title)}</h3>
+            <h3 class="feature-title">
+            ${escapeHtml(item.title)}</h3>
             <p class="feature-desc">${escapeHtml(item.desc)}</p>
           </div>
         </div>`;
@@ -179,6 +180,40 @@ function renderMembership(data) {
     </section>`;
 }
 
+function renderAppModal(modal) {
+  if (!modal) return '';
+
+  const qrCodes = (modal.qrCodes || [])
+    .map(
+      (qr) => `
+      <div class="app-modal__qr-item">
+        <div class="app-modal__qr-card">
+          ${img(qr.image, qr.label, 'app-modal__qr-img')}
+        </div>
+        <span class="app-modal__qr-label">${escapeHtml(qr.label)}</span>
+      </div>`
+    )
+    .join('');
+
+  const bgStyle = modal.background
+    ? ` style="background-image: url('${escapeHtml(modal.background)}')"`
+    : '';
+
+  return `
+    <div id="app-modal" class="app-modal" hidden aria-hidden="true">
+      <div class="app-modal__backdrop" data-modal-close></div>
+      <div class="app-modal__panel"${bgStyle} role="dialog" aria-modal="true" aria-labelledby="app-modal-title" tabindex="-1">
+        <button type="button" class="app-modal__close" data-modal-close aria-label="关闭">
+          ${img('./assets/close-btn.png', '关闭', 'app-modal__close-icon')}
+        </button>
+        <div class="app-modal__body">
+          <h3 id="app-modal-title" class="app-modal__title">${escapeHtml(modal.title)} <br/> ${escapeHtml(modal.subtitle)}</h3>
+          <div class="app-modal__qr-wrap">${qrCodes}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderFooter(data) {
   const qrCodes = data.qrCodes
     .map(
@@ -209,6 +244,39 @@ function updateMeta(meta) {
     let descEl = document.querySelector('meta[name="description"]');
     if (descEl) descEl.setAttribute('content', meta.description);
   }
+}
+
+function initAppModal() {
+  const modal = document.getElementById('app-modal');
+  const openBtn = document.getElementById('header-cta-btn');
+  if (!modal || !openBtn) return;
+
+  const closeEls = modal.querySelectorAll('[data-modal-close]');
+  const panel = modal.querySelector('.app-modal__panel');
+
+  function openModal() {
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    panel?.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', openModal);
+
+  closeEls.forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
 }
 
 function initHeroCarousel() {
@@ -243,9 +311,11 @@ async function init() {
       renderMembership(data.membership),
       '</main>',
       renderFooter(data.footer),
+      renderAppModal(data.header.modal),
     ].join('');
 
     initHeroCarousel();
+    initAppModal();
   } catch (err) {
     app.innerHTML = `<p class="loading error">加载失败：${escapeHtml(err.message)}<br>请通过 HTTP 服务访问（如 npx serve .）</p>`;
   }
