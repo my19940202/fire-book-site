@@ -1,0 +1,13 @@
+# 不上传到 Workers 的文件
+.git/**
+.claude/**
+node_modules/**
+.DS_Store
+*.md
+FIRE-web-design.jpeg
+wrangler.jsonc
+package.json
+package-lock.json
+pnpm-lock.yaml
+.gitignore
+.assetsignore

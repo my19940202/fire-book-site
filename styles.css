@@ -345,7 +345,8 @@
 
 /* Footer */
 .site-footer {
-  background: linear-gradient(180deg, #dbeafe 0%, #bfdbfe 100%);
+  background: url('./assets/Image_Container@2x.png') no-repeat center center;
+  background-size: cover;
 }
 
 .footer-contact-line {

@@ -53,12 +53,49 @@ fire-book-site/
 └── FIRE-web-design.jpeg  # 设计参考稿
 ```
 
-## 部署
+## 部署（Cloudflare Workers Static Assets）
 
-将以下文件上传到任意静态托管（GitHub Pages、Cloudflare Pages 等）：
+本项目为纯静态站点，使用 [Workers Static Assets](https://developers.cloudflare.com/workers/static-assets/) 部署，**无需构建步骤**。
 
-- `index.html`
-- `app.js`
-- `styles.css`
-- `content.json`
+### 首次部署
+
+```bash
+# 1. 安装依赖
+pnpm install
+
+# 2. 登录 Cloudflare（首次）
+pnpm wrangler login
+
+# 3. 本地预览（Wrangler 内置静态服务，支持 fetch content.json）
+pnpm dev
+
+# 4. 部署到 Cloudflare
+pnpm deploy
+```
+
+部署成功后 Wrangler 会输出 `*.workers.dev` 预览地址。
+
+### 配置文件
+
+| 文件 | 作用 |
+|------|------|
+| [`wrangler.jsonc`](wrangler.jsonc) | Worker 名称、`assets.directory` 指向项目根目录 |
+| [`.assetsignore`](.assetsignore) | 排除 `.git`、`node_modules`、设计稿等不上传 |
+
+### 自定义域名
+
+在 Cloudflare Dashboard → Workers → 你的 Worker → **Settings → Domains** 添加，或在 `wrangler.jsonc` 中配置 `routes`。
+
+### 注意事项
+
+- **Tailwind CDN**：`index.html` 引用了 `cdn.tailwindcss.com`，部署后需能访问外网 CDN（Cloudflare Workers 默认可以）
+- **无需 `main` 脚本**：没有 Worker 逻辑时，Wrangler 会自动以静态资源模式运行
+- **改内容**：编辑 `content.json` 后重新 `pnpm deploy` 即可
+- **图片体积**：`assets/` 中部分 PNG 较大，首次上传可能稍慢；单文件上限 25 MiB
+
+### 其他托管方式
+
+也可手动上传以下文件到 GitHub Pages 等静态托管：
+
+- `index.html`、`app.js`、`styles.css`、`content.json`、`favicon.ico`
 - `assets/` 目录

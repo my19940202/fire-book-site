@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fire-book-site",
+  "compatibility_date": "2026-06-25",
+  // 纯静态站点：无需 main Worker 脚本
+  "assets": {
+    "directory": ".",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "observability": {
+    "enabled": true
+  }
+  // 绑定自定义域名时取消注释：
+  // "routes": [
+  //   { "pattern": "fire.example.com", "custom_domain": true }
+  // ]
+}
