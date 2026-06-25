@@ -28,7 +28,8 @@
       "icon": "./assets/Frame_2@2x.png",
       "href": "#"
     },
-    "phoneImage": "./assets/Iphone_Image@2x.png"
+    "phoneImage": "./assets/Iphone_Image@2x.png",
+    "phoneImage2": "./assets/Iphone_Image_pop@2x.png"
   },
   "feature": {
     "id": "feature",
@@ -146,6 +147,6 @@
       { "label": "专属客服一", "image": "./assets/wechat-1.png" },
       { "label": "专属客服二", "image": "./assets/wechat-2.png" }
     ],
-    "copyright": "© 2025 FIRE记账 版权所有"
+    "copyright": "© 2026 FIRE记账 版权所有"
   }
 }

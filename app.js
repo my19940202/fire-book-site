@@ -7,12 +7,13 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-function img(src, alt, className) {
+function img(src, alt, className, id) {
   const safeSrc = escapeHtml(src);
   const safeAlt = escapeHtml(alt);
   const safeClass = className ? ` class="${escapeHtml(className)}"` : '';
+  const safeId = id ? ` id="${escapeHtml(id)}"` : '';
   const fallback = `https://placehold.co/100x100?text=${encodeURIComponent(alt || 'img')}`;
-  return `<img src="${safeSrc}" alt="${safeAlt}"${safeClass} loading="lazy" onerror="this.onerror=null;this.src='${fallback}'" />`;
+  return `<img src="${safeSrc}" alt="${safeAlt}"${safeClass}${safeId} loading="lazy" onerror="this.onerror=null;this.src='${fallback}'" />`;
 }
 
 function renderCell(value, checkIcon, isMember) {
@@ -60,7 +61,7 @@ function renderHero(data) {
             </div>
           </div>
 
-          <div class="flex flex-col gap-4 w-[301px]">
+          <div class="flex flex-col gap-4 w-[260px]">
             <a href="${escapeHtml(data.androidBtn.href)}" class="download-btn">
               ${img(data.androidBtn.icon, 'Android', 'download-btn-icon')}
               <span>${escapeHtml(data.androidBtn.text)}</span>
@@ -72,10 +73,10 @@ function renderHero(data) {
           </div>
         </div>
         <div class="hero-phone flex-1 flex justify-center items-end pb-8 relative">
-          ${img(data.phoneImage, 'FIRE记账 App 界面', 'hero-phone-img')}
+          ${img(data.phoneImage, 'FIRE记账 App 界面', 'hero-phone-img', 'hero-phone-img')}
           <div class="hero-dots absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            <span class="hero-dot w-[36px] h-[4px] rounded-full hero-dot--active"></span>
-            <span class="hero-dot w-[36px] h-[4px] rounded-full "></span>
+            <button type="button" class="hero-dot w-[36px] h-[4px] rounded-full hero-dot--active" data-phone-image="${escapeHtml(data.phoneImage)}" aria-label="展示界面一"></button>
+            <button type="button" class="hero-dot w-[36px] h-[4px] rounded-full" data-phone-image="${escapeHtml(data.phoneImage2)}" aria-label="展示界面二"></button>
           </div>
         </div>
       </div>
@@ -210,6 +211,22 @@ function updateMeta(meta) {
   }
 }
 
+function initHeroCarousel() {
+  const phoneImg = document.getElementById('hero-phone-img');
+  const dots = document.querySelectorAll('.hero-dot[data-phone-image]');
+  if (!phoneImg || !dots.length) return;
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const src = dot.dataset.phoneImage;
+      if (!src) return;
+
+      phoneImg.src = src;
+      dots.forEach((d) => d.classList.toggle('hero-dot--active', d === dot));
+    });
+  });
+}
+
 async function init() {
   const app = document.getElementById('app');
   try {
@@ -227,6 +244,8 @@ async function init() {
       '</main>',
       renderFooter(data.footer),
     ].join('');
+
+    initHeroCarousel();
   } catch (err) {
     app.innerHTML = `<p class="loading error">加载失败：${escapeHtml(err.message)}<br>请通过 HTTP 服务访问（如 npx serve .）</p>`;
   }
