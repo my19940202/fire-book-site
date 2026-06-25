@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="开启FIRE时光，让家庭财富成长的每一步" />
+  <title>FIRE记账</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#3B82F6',
+              light: '#EFF6FF',
+              dark: '#2563EB',
+            },
+            navy: '#0F1623',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body class="bg-white text-navy antialiased">
+  <div id="app">
+    <p class="loading">加载中...</p>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>

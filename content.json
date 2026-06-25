@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "FIRE记账 - 家庭资产管理记账APP",
+    "description": "开启FIRE时光，让家庭财富成长的每一步"
+  },
+  "header": {
+    "icon": "./assets/Navigation_Container@2x.jxl",
+    "logoText": "FIRE记账",
+    "logoSubtext": "开启财富成长的每一步",
+    "tabs": [
+      { "text": "首页", "href": "#hero" },
+      { "text": "产品功能", "href": "#feature" },
+      { "text": "会员权益", "href": "#membership" }
+    ],
+    "suffixBtn": { "text": "去APP查看更多内容", "href": "#" }
+  },
+  "hero": {
+    "icon": "./assets/Frame@2x.jxl",
+    "title": "FIRE记账",
+    "subtitle": "开启FIRE时光，让家庭财富成长的每一步",
+    "androidBtn": {
+      "text": "Android版下载",
+      "icon": "./assets/Download_Android_Button_Container@2x.jxl",
+      "href": "#"
+    },
+    "iosBtn": {
+      "text": "iOS版下载",
+      "icon": "./assets/Download_iOS_Button_Container@2x.jxl",
+      "href": "#"
+    },
+    "phoneImage": "./assets/Iphone_Image@2x.jxl"
+  },
+  "feature": {
+    "id": "feature",
+    "title": "FIRE记账是以资产管理为主的记账类APP",
+    "subtitle": "数据安全加密存储，多设备同步，让家庭资产一目了然。支持证券、负债、定期存款等多维度资产管理，助你轻松掌握家庭财富全貌。",
+    "items": [
+      {
+        "icon": "./assets/功能-01.jxl",
+        "title": "证券管理",
+        "desc": "记录股票、基金等证券资产，自动计算盈亏",
+        "highlight": false
+      },
+      {
+        "icon": "./assets/功能-02.jxl",
+        "title": "负债管理",
+        "desc": "管理房贷、车贷等负债，自动生成还款计划",
+        "highlight": false
+      },
+      {
+        "icon": "./assets/功能-03.jxl",
+        "title": "定期存款",
+        "desc": "计算利息，到期提醒，不错过任何收益",
+        "highlight": false
+      },
+      {
+        "icon": "./assets/功能-04.jxl",
+        "title": "日历报表",
+        "desc": "每日盈亏一目了然，掌握资产变化趋势",
+        "highlight": true
+      },
+      {
+        "icon": "./assets/功能-05.jxl",
+        "title": "信用卡管理",
+        "desc": "账单提醒与还款追踪，避免逾期",
+        "highlight": false
+      },
+      {
+        "icon": "./assets/功能-06.jxl",
+        "title": "定期功能",
+        "desc": "房租、水电、会员等周期性账单自动生成",
+        "highlight": false
+      },
+      {
+        "icon": "./assets/功能-07.jxl",
+        "title": "自动记账",
+        "desc": "一键导入，智能分类，记账更高效",
+        "highlight": false
+      },
+      {
+        "icon": "./assets/功能-08.jxl",
+        "title": "数据安全",
+        "desc": "数据加密存储，多维度备份保障",
+        "highlight": false
+      }
+    ]
+  },
+  "membership": {
+    "id": "membership",
+    "title": "限时优惠开放中，现在入手更划算",
+    "subtitle": "选择适合你的会员方案，解锁全部功能，支持开发者持续优化产品",
+    "plans": [
+      {
+        "name": "标准版",
+        "price": "免费",
+        "subPrice": null,
+        "badge": null,
+        "features": ["基础日常记账", "有限功能体验", "适合轻度使用"]
+      },
+      {
+        "name": "月度会员",
+        "price": "12 元/月",
+        "subPrice": null,
+        "badge": "最受欢迎版本",
+        "features": ["解锁全部高级功能", "无广告体验", "自动记账无限次"]
+      },
+      {
+        "name": "年度会员",
+        "price": "58 元/年",
+        "subPrice": "138 元/三年",
+        "badge": null,
+        "features": ["全部功能解锁", "超高性价比", "长期稳定使用"]
+      },
+      {
+        "name": "永久会员",
+        "price": "218 元/终身",
+        "subPrice": null,
+        "badge": null,
+        "features": ["一次购买永久使用", "未来新功能免费", "最划算的长期选择"]
+      }
+    ],
+    "comparison": {
+      "title": "会员特权范围说明",
+      "checkIcon": "./assets/Image_-_check-circle-fill@2x.jxl",
+      "headers": ["功能权益", "FIRE会员", "普通用户"],
+      "rows": [
+        { "feature": "自动记账", "member": "无限次", "user": "每日1条" },
+        { "feature": "无广告", "member": "check", "user": "check" },
+        { "feature": "会员福利", "member": "check", "user": "—" },
+        { "feature": "证券资产", "member": "无限", "user": "1个" },
+        { "feature": "负债账户", "member": "无限", "user": "3个" },
+        { "feature": "固定资产", "member": "无限", "user": "3个" },
+        { "feature": "现金账户", "member": "无限", "user": "5个" },
+        { "feature": "信用卡", "member": "无限", "user": "3个" },
+        { "feature": "定期存款", "member": "无限", "user": "3个" },
+        { "feature": "日历报表", "member": "check", "user": "check" },
+        { "feature": "数据导出", "member": "check", "user": "—" },
+        { "feature": "多设备同步", "member": "check", "user": "check" }
+      ]
+    }
+  },
+  "footer": {
+    "wechat": "微信公众号: fire记账",
+    "business": "商务合作: fire记账",
+    "qrCodes": [
+      { "label": "专属客服一", "image": "./assets/微信1.jxl" },
+      { "label": "专属客服二", "image": "./assets/微信2.jxl" }
+    ],
+    "copyright": "© 2025 FIRE记账 版权所有"
+  }
+}
