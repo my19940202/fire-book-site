@@ -37,9 +37,9 @@ python3 -m http.server 8080
 
 ### 图片路径
 
-- 优先使用 `./assets/` 下已有资源（如 `Navigation_Container@2x.jxl`）
+- assets 为 `.png` 格式（由 `.jxl` 批量转换，使用 `djxl`，保留透明通道）
 - 加载失败时自动回退到 `https://placehold.co/100x100`
-- assets 为 `.jxl`（JPEG XL）格式，Firefox 默认不支持；建议后续批量转为 `.webp` / `.png`
+- 原始 `.jxl` 与中间产物 `.jpg` 仍保留在 `assets/`，可按需删除
 
 ## 文件结构
 

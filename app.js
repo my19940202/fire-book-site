@@ -36,17 +36,13 @@ function renderHeader(data) {
     .join('');
 
   return `
-    <header class="site-header sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100">
-      <div class="header-inner w-[1080.3px] max-w-full h-fit inline-flex place-content-between place-items-center gap-5 flex-shrink-0 mx-auto px-6 py-4">
+    <header class="site-header sticky top-0 z-50 bg-white backdrop-blur border-b border-gray-100">
+      <div class="header-inner w-[1080.3px] max-w-full h-fit flex place-content-between place-items-center gap-5 mx-auto px-6 py-4">
         <a href="#hero" class="flex items-center gap-3 no-underline">
-          ${img(data.icon, data.logoText, 'header-logo')}
-          <div>
-            <div class="text-lg font-bold text-navy leading-tight">${escapeHtml(data.logoText)}</div>
-            <div class="text-xs text-gray-500">${escapeHtml(data.logoSubtext)}</div>
-          </div>
+          ${img(data.icon, data.logoText, 'header-logo w-[233px] h-[22px]')}
         </a>
         <nav class="hidden md:flex items-center gap-8">${tabs}</nav>
-        <a href="${escapeHtml(data.suffixBtn.href)}" class="header-cta shrink-0">${escapeHtml(data.suffixBtn.text)}</a>
+        <a href="${escapeHtml(data.suffixBtn.href)}" class="header-cta shrink-0 rounded-[8px] p-[8px] bg-[linear-gradient(270deg,_rgba(109,_197,_255,_1)_0%,_rgba(53,_107,_255,_1)_90.87%)]">${escapeHtml(data.suffixBtn.text)}</a>
       </div>
     </header>`;
 }
@@ -56,10 +52,15 @@ function renderHero(data) {
     <section id="hero" class="hero-section left-0 w-full max-w-[1920px] mx-auto h-[640.2px] relative overflow-hidden">
       <div class="hero-inner max-w-[1080px] mx-auto px-6 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
         <div class="hero-content flex-1 pt-8 md:pt-0">
-          ${img(data.icon, data.title, 'hero-app-icon mb-6')}
-          <h1 class="text-4xl md:text-5xl font-bold text-navy mb-4">${escapeHtml(data.title)}</h1>
-          <p class="text-lg text-gray-600 mb-8 max-w-md">${escapeHtml(data.subtitle)}</p>
-          <div class="flex flex-col sm:flex-row gap-4">
+          <div class="hero-title-row flex items-center gap-4 md:gap-6 mb-8">
+            ${img(data.icon, data.title, 'hero-app-icon shrink-0')}
+            <div>
+              <h1 class="text-4xl md:text-5xl font-bold text-navy mb-2">${escapeHtml(data.title)}</h1>
+              <p class="text-lg text-gray-600 max-w-md">${escapeHtml(data.subtitle)}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-4 w-[301px]">
             <a href="${escapeHtml(data.androidBtn.href)}" class="download-btn">
               ${img(data.androidBtn.icon, 'Android', 'download-btn-icon')}
               <span>${escapeHtml(data.androidBtn.text)}</span>
@@ -70,14 +71,13 @@ function renderHero(data) {
             </a>
           </div>
         </div>
-        <div class="hero-phone flex-1 flex justify-center items-end pb-8">
+        <div class="hero-phone flex-1 flex justify-center items-end pb-8 relative">
           ${img(data.phoneImage, 'FIRE记账 App 界面', 'hero-phone-img')}
+          <div class="hero-dots absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            <span class="hero-dot w-[36px] h-[4px] rounded-full hero-dot--active"></span>
+            <span class="hero-dot w-[36px] h-[4px] rounded-full "></span>
+          </div>
         </div>
-      </div>
-      <div class="hero-dots absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-        <span class="hero-dot hero-dot--active"></span>
-        <span class="hero-dot"></span>
-        <span class="hero-dot"></span>
       </div>
     </section>`;
 }
