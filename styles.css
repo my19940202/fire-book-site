@@ -221,6 +221,18 @@ body.modal-open {
   object-fit: contain;
 }
 
+.hero-title-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .hero-title-img {
+    height: 56px;
+  }
+}
+
 .hero-phone-img {
   max-height: 520px;
   width: auto;

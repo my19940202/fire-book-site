@@ -28,40 +28,17 @@ function renderCell(value, checkIcon, isMember) {
   return `<span class="${cellClass}">${escapeHtml(value)}</span>`;
 }
 
-function getCurrentNavHash() {
-  return window.location.hash || '#hero';
-}
-
-function isNavTabActive(href) {
-  if (!href) return false;
-
-  const currentHash = getCurrentNavHash();
-
-  if (href.startsWith('#')) {
-    return href === currentHash;
-  }
-
-  try {
-    const url = new URL(href, window.location.href);
-    return (
-      url.pathname === window.location.pathname &&
-      (url.hash || '#hero') === currentHash
-    );
-  } catch {
-    return false;
-  }
-}
-
 function renderHeader(data) {
+  const navHash = location.hash || '#hero';
   const tabs = data.tabs
     .map((tab) => {
-      const activeClass = isNavTabActive(tab.href) ? ' nav-tab--active' : '';
+      const activeClass = tab.href === navHash ? ' nav-tab--active' : '';
       return `<a href="${escapeHtml(tab.href)}" class="nav-tab${activeClass}">${escapeHtml(tab.text)}</a>`;
     })
     .join('');
 
   return `
-    <header class="site-header sticky top-0 z-50 bg-white backdrop-blur border-b border-gray-100">
+    <header id="header" class="site-header sticky top-0 z-50 bg-white backdrop-blur border-b border-gray-100">
       <div class="header-inner w-[1080.3px] max-w-full h-fit flex place-content-between place-items-center gap-5 mx-auto px-6 py-4">
         <a href="#hero" class="flex items-center gap-3 no-underline">
           ${img(data.icon, data.logoText, 'header-logo w-[233px] h-[22px]')}
@@ -78,10 +55,10 @@ function renderHero(data) {
       <div class="hero-inner max-w-[1080px] mx-auto px-6 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
         <div class="hero-content flex-1 pt-8 md:pt-0">
           <div class="hero-title-row flex items-center gap-4 md:gap-6 mb-8">
-            ${img(data.icon, data.title, 'hero-app-icon shrink-0')}
+            ${img(data.icon, data.title, 'hero-app-icon shrink-0 w-[81px] h-[81px]')}
             <div>
-              <h1 class="text-4xl md:text-5xl font-bold text-navy mb-2">${escapeHtml(data.title)}</h1>
-              <p class="text-lg text-gray-600 max-w-md">${escapeHtml(data.subtitle)}</p>
+              <div class="mb-2">${img('./assets/Product_Title.png', data.title, 'hero-title-img w-[215px]')}</div>
+              <p class="text-lg max-w-md">${escapeHtml(data.subtitle)}</p>
             </div>
           </div>
 
@@ -307,15 +284,63 @@ function initAppModal() {
   });
 }
 
+function scrollToHash(hash, smooth = true) {
+  const behavior = smooth ? 'smooth' : 'auto';
+  const h = hash || '#hero';
+
+  if (h === '#hero') {
+    window.scrollTo({ top: 0, behavior });
+    return;
+  }
+
+  const el = document.getElementById(h.slice(1));
+  if (!el) return;
+
+  const headerH = document.querySelector('.site-header')?.offsetHeight ?? 0;
+  const top = el.getBoundingClientRect().top + window.scrollY - headerH;
+  window.scrollTo({ top: Math.max(0, top), behavior });
+}
+
 function updateNavTabs() {
+  const current = location.hash || '#hero';
   document.querySelectorAll('.nav-tab').forEach((link) => {
-    link.classList.toggle('nav-tab--active', isNavTabActive(link.getAttribute('href')));
+    link.classList.toggle('nav-tab--active', link.getAttribute('href') === current);
   });
 }
 
-function initNavTabs() {
-  updateNavTabs();
-  window.addEventListener('hashchange', updateNavTabs);
+function initAnchorNav() {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  const app = document.getElementById('app');
+  if (!app) return;
+
+  app.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link || !app.contains(link)) return;
+
+    const href = link.getAttribute('href');
+    if (!href || href === '#') return;
+
+    e.preventDefault();
+    scrollToHash(href, true);
+    if (location.hash !== href) {
+      history.pushState(null, '', `${location.pathname}${location.search}${href}`);
+    }
+    updateNavTabs();
+  });
+
+  window.addEventListener('popstate', () => {
+    scrollToHash(location.hash, false);
+    updateNavTabs();
+  });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      if (location.hash) scrollToHash(location.hash, false);
+      updateNavTabs();
+    });
+  });
 }
 
 function initHeroCarousel() {
@@ -353,7 +378,7 @@ async function init() {
       renderAppModal(data.header.modal),
     ].join('');
 
-    initNavTabs();
+    initAnchorNav();
     initHeroCarousel();
     initAppModal();
   } catch (err) {
