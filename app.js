@@ -24,16 +24,40 @@ function renderCell(value, checkIcon, isMember) {
   if (value === '—') {
     return '<span class="text-gray-400">—</span>';
   }
-  const cellClass = isMember ? 'text-brand font-medium' : 'text-gray-600';
+  const cellClass = isMember ? 'text-brand' : 'text-gray-600';
   return `<span class="${cellClass}">${escapeHtml(value)}</span>`;
+}
+
+function getCurrentNavHash() {
+  return window.location.hash || '#hero';
+}
+
+function isNavTabActive(href) {
+  if (!href) return false;
+
+  const currentHash = getCurrentNavHash();
+
+  if (href.startsWith('#')) {
+    return href === currentHash;
+  }
+
+  try {
+    const url = new URL(href, window.location.href);
+    return (
+      url.pathname === window.location.pathname &&
+      (url.hash || '#hero') === currentHash
+    );
+  } catch {
+    return false;
+  }
 }
 
 function renderHeader(data) {
   const tabs = data.tabs
-    .map(
-      (tab) =>
-        `<a href="${escapeHtml(tab.href)}" class="nav-tab">${escapeHtml(tab.text)}</a>`
-    )
+    .map((tab) => {
+      const activeClass = isNavTabActive(tab.href) ? ' nav-tab--active' : '';
+      return `<a href="${escapeHtml(tab.href)}" class="nav-tab${activeClass}">${escapeHtml(tab.text)}</a>`;
+    })
     .join('');
 
   return `
@@ -92,7 +116,9 @@ function renderFeature(data) {
           ${img(item.icon, item.title, 'feature-icon')}
           <div>
             <h3 class="feature-title">
-            ${escapeHtml(item.title)}</h3>
+              ${escapeHtml(item.title)}
+              ${item.tag ? `<span class="feature-tag">${escapeHtml(item.tag)}</span>` : ''}
+            </h3>
             <p class="feature-desc">${escapeHtml(item.desc)}</p>
           </div>
         </div>`;
@@ -103,7 +129,7 @@ function renderFeature(data) {
     <section id="${escapeHtml(data.id)}" class="feature-section py-20 px-6">
       <div class="max-w-[1080px] mx-auto">
         <div class="text-center mb-14">
-          <h2 class="section-title">${escapeHtml(data.title)}</h2>
+          <h2 class="section-title">${escapeHtml(data.title)} </h2>
           <p class="section-subtitle mt-4 max-w-2xl mx-auto">${escapeHtml(data.subtitle)}</p>
         </div>
         <div class="feature-grid">${items}</div>
@@ -116,7 +142,7 @@ function renderPlanCard(plan) {
     ? `<div class="plan-badge">${escapeHtml(plan.badge)}</div>`
     : '';
   const subPrice = plan.subPrice
-    ? `<div class="plan-sub-price">${escapeHtml(plan.subPrice)}</div>`
+    ? `<div class="plan-sub-price">${plan.subPrice}</div>`
     : '';
   const features = plan.features
     .map((f) => `<li class="plan-feature-item">${escapeHtml(f)}</li>`)
@@ -128,8 +154,10 @@ function renderPlanCard(plan) {
     <div class="${popularClass}">
       ${badge}
       <h3 class="plan-name">${escapeHtml(plan.name)}</h3>
-      <div class="plan-price">${escapeHtml(plan.price)}</div>
-      ${subPrice}
+      <div class="plan-price">
+        <div class="plan-sub-price">${plan.price}</div>
+        ${subPrice}
+      </div>
       <ul class="plan-features">${features}</ul>
     </div>`;
 }
@@ -137,13 +165,13 @@ function renderPlanCard(plan) {
 function renderMembership(data) {
   const plans = data.plans.map(renderPlanCard).join('');
   const checkIcon = data.comparison.checkIcon;
-
+  const checkIconMember = data.comparison.checkIconMember;
   const rows = data.comparison.rows
     .map(
       (row, i) => `
       <tr class="${i % 2 === 0 ? 'comparison-row-even' : 'comparison-row-odd'}">
         <td class="comparison-feature">${escapeHtml(row.feature)}</td>
-        <td class="comparison-member">${renderCell(row.member, checkIcon, true)}</td>
+        <td class="comparison-member">${renderCell(row.member, checkIconMember, true)}</td>
         <td class="comparison-user">${renderCell(row.user, checkIcon, false)}</td>
       </tr>`
     )
@@ -279,6 +307,17 @@ function initAppModal() {
   });
 }
 
+function updateNavTabs() {
+  document.querySelectorAll('.nav-tab').forEach((link) => {
+    link.classList.toggle('nav-tab--active', isNavTabActive(link.getAttribute('href')));
+  });
+}
+
+function initNavTabs() {
+  updateNavTabs();
+  window.addEventListener('hashchange', updateNavTabs);
+}
+
 function initHeroCarousel() {
   const phoneImg = document.getElementById('hero-phone-img');
   const dots = document.querySelectorAll('.hero-dot[data-phone-image]');
@@ -314,6 +353,7 @@ async function init() {
       renderAppModal(data.header.modal),
     ].join('');
 
+    initNavTabs();
     initHeroCarousel();
     initAppModal();
   } catch (err) {
