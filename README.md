@@ -1,6 +1,9 @@
 # fire-book-site
 
 FIRE记账 App 官网 — 便于 Web 端推广和营销。
+设计图资源 https://moonvy.com/project/a44ca1b4-9ef2-4f5d-a744-30f5f232f8c1/6b6bd6cd-109c-4875-ad49-988071105004/10cb95e6-cf9f-4099-9191-9e5b42e247a3
+
+账户 https://www.xiaohongshu.com/user/profile/67fa72e20000000004039159?xsec_token=ABIlFeLCqKdUAeAZwE9nQZGSFfY90isXk1uPoO7feCbLo%3D&xsec_source=pc_search
 
 ## 技术方案
 
