@@ -76,30 +76,65 @@ function renderPlanCard(plan) {
     </div>`;
 }
 
-function renderComparisonRow(row, checkIcon, checkIconMember) {
-  function cell(value, isMember) {
-    if (value === 'check') {
-      const icon = isMember ? checkIconMember : checkIcon;
-      const cls = isMember ? 'h5-comparison__check h5-comparison__check--member' : 'h5-comparison__check';
-      return `<span class="${cls}">${img(icon, '已支持', 'h5-comparison__check-icon')}</span>`;
-    }
-    if (value === '—') return '<span class="h5-comparison__dash">—</span>';
-    return `<span class="${isMember ? 'h5-comparison__member' : 'h5-comparison__user'}">${escapeHtml(value)}</span>`;
+function renderComparisonCell(value, isMember, icons) {
+  const { checkIcon, checkIconMember, crossIcon } = icons;
+  if (value === 'check') {
+    const icon = isMember ? checkIconMember : checkIcon;
+    const cls = isMember
+      ? 'h5-comparison__icon h5-comparison__icon--check-member'
+      : 'h5-comparison__icon h5-comparison__icon--check-user';
+    return `<span class="${cls}">${img(icon, '已支持', 'h5-comparison__icon-img')}</span>`;
   }
+  if (value === '—') {
+    return `<span class="h5-comparison__icon h5-comparison__icon--cross">${img(crossIcon, '不支持', 'h5-comparison__icon-img')}</span>`;
+  }
+  return `<span class="${isMember ? 'h5-comparison__member' : 'h5-comparison__user'}">${escapeHtml(value)}</span>`;
+}
+
+function renderComparison(comparison) {
+  const icons = {
+    checkIcon: comparison.checkIcon,
+    checkIconMember: comparison.checkIconMember,
+    crossIcon: comparison.crossIcon || './assets/Image_-_close-circle@2x.png',
+  };
+
+  const featureCells = comparison.rows
+    .map((row) => `<div class="h5-comparison__cell">${escapeHtml(row.feature)}</div>`)
+    .join('');
+
+  const memberCells = comparison.rows
+    .map((row) => `<div class="h5-comparison__cell">${renderComparisonCell(row.member, true, icons)}</div>`)
+    .join('');
+
+  const userCells = comparison.rows
+    .map((row) => `<div class="h5-comparison__cell">${renderComparisonCell(row.user, false, icons)}</div>`)
+    .join('');
 
   return `
-    <div class="h5-comparison__row">
-      <span class="h5-comparison__feature">${escapeHtml(row.feature)}</span>
-      <span class="h5-comparison__cell">${cell(row.member, true)}</span>
-      <span class="h5-comparison__cell">${cell(row.user, false)}</span>
+    <div class="h5-comparison">
+      <div class="h5-comparison__badge">${escapeHtml(comparison.title)}</div>
+      <div class="h5-comparison__body">
+        <div class="h5-comparison__col h5-comparison__col--feature">
+          <div class="h5-comparison__head-cell">功能权益</div>
+          ${featureCells}
+        </div>
+        <div class="h5-comparison__col h5-comparison__col--member">
+          <div class="h5-comparison__head-cell">
+            <span>FIRE会员</span>
+            ${img('./assets/member-diamond@2x.png', 'FIRE会员', 'h5-comparison__badge-icon')}
+          </div>
+          ${memberCells}
+        </div>
+        <div class="h5-comparison__col h5-comparison__col--user">
+          <div class="h5-comparison__head-cell">普通用户</div>
+          ${userCells}
+        </div>
+      </div>
     </div>`;
 }
 
 export function renderMembership(data) {
   const plans = data.plans.map(renderPlanCard).join('');
-  const rows = data.comparison.rows
-    .map((row) => renderComparisonRow(row, data.comparison.checkIcon, data.comparison.checkIconMember))
-    .join('');
 
   return `
     <section id="${escapeHtml(data.id)}" class="h5-membership">
@@ -108,15 +143,7 @@ export function renderMembership(data) {
         <p class="h5-section-subtitle">${escapeHtml(data.subtitle)}</p>
       </div>
       <div class="plan-grid">${plans}</div>
-      <div class="h5-comparison">
-        <h3 class="h5-comparison__title">${escapeHtml(data.comparison.title)}</h3>
-        <div class="h5-comparison__head">
-          <span>功能权益</span>
-          <span class="h5-comparison__head-member">FIRE会员</span>
-          <span>普通用户</span>
-        </div>
-        ${rows}
-      </div>
+      ${renderComparison(data.comparison)}
     </section>`;
 }
 

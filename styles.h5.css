@@ -333,7 +333,7 @@ html.platform-h5 .plan-card--popular {
 }
 
 html.platform-h5 .plan-card--popular .plan-name,
-html.platform-h5 .plan-card--popular .plan-price {
+html.platform-h5 .plan-card--popular .plan-sub-price {
   color: rgba(57, 108, 241, 1);
 }
 
@@ -398,90 +398,129 @@ html.platform-h5 .plan-feature-item:first-child {
   border-top: none;
 }
 
-/* Comparison (mobile card layout) */
+/* Comparison (mobile column layout) */
 html.platform-h5 .h5-comparison {
   background: #fff;
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  padding: 0 12px 12px;
+  margin-top: 48px;
+  position: relative;
 }
 
-html.platform-h5 .h5-comparison__title {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  text-align: center;
-  color: #0f1623;
-  padding: 16px 12px 12px;
+html.platform-h5 .h5-comparison__badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #4f8ef7, #6366f1);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  position: absolute;
+  top: -32px;
+  left: 0;
 }
 
-html.platform-h5 .h5-comparison__head {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 4px;
-  padding: 8px 12px;
-  background: #f9fafb;
+html.platform-h5 .h5-comparison__body {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+html.platform-h5 .h5-comparison__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+html.platform-h5 .h5-comparison__col--feature {
+  flex: 1.2;
+}
+
+html.platform-h5 .h5-comparison__col--member {
+  flex: 1;
+  border: 1px solid #b8d4ff;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #f0f6ff 0%, #fafcff 100%);
+  margin: 0 2px;
+}
+
+html.platform-h5 .h5-comparison__col--user {
+  flex: 1;
+}
+
+html.platform-h5 .h5-comparison__head-cell {
+  padding: 10px 6px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #374151;
   text-align: center;
-  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
 }
 
-html.platform-h5 .h5-comparison__head span:first-child {
+html.platform-h5 .h5-comparison__col--feature .h5-comparison__head-cell {
   text-align: left;
 }
 
-html.platform-h5 .h5-comparison__head-member {
-  color: #3b82f6;
+html.platform-h5 .h5-comparison__col--member .h5-comparison__head-cell {
+  color: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
-html.platform-h5 .h5-comparison__row {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 4px;
-  padding: 10px 12px;
+html.platform-h5 .h5-comparison__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 6px;
   font-size: 0.75rem;
   text-align: center;
-  border-bottom: 1px solid #f3f4f6;
+  min-height: 38px;
 }
 
-html.platform-h5 .h5-comparison__row:nth-child(even) {
-  background: #fafafa;
-}
-
-html.platform-h5 .h5-comparison__feature {
+html.platform-h5 .h5-comparison__col--feature .h5-comparison__cell {
+  justify-content: flex-start;
   text-align: left;
   font-weight: 500;
   color: #374151;
+}
+
+html.platform-h5 .h5-comparison__col--member .h5-comparison__cell {
+  border-top-color: #e8f0fe;
 }
 
 html.platform-h5 .h5-comparison__member {
-  color: #3b82f6;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 html.platform-h5 .h5-comparison__user {
-  color: #6b7280;
+  color: #9ca3af;
 }
 
-html.platform-h5 .h5-comparison__dash {
-  color: #d1d5db;
-}
-
-html.platform-h5 .h5-comparison__check-icon {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-  vertical-align: middle;
-}
-html.platform-h5 .h5-comparison__check {
+html.platform-h5 .h5-comparison__icon {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-html.platform-h5 .h5-comparison__check:not(.h5-comparison__check--member) .h5-comparison__check-icon {
-  opacity: 0.45;
+html.platform-h5 .h5-comparison__icon-img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+html.platform-h5 .h5-comparison__icon--check-user .h5-comparison__icon-img {
+  opacity: 0.4;
   filter: grayscale(1);
+}
+
+html.platform-h5 .h5-comparison__badge-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 /* App Modal */
@@ -603,7 +642,7 @@ html.platform-h5 .app-modal__qr-label {
 /* Footer */
 html.platform-h5 .h5-footer {
   padding: 32px 16px 28px;
-  background: url('./assets/Image_Container@2x.png') no-repeat center center;
+  background: linear-gradient(180deg, #eef4ff 0%, #f8faff 60%, #fff 100%);
   background-size: cover;
   text-align: center;
 }

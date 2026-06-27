@@ -84,13 +84,13 @@
       }
     ],
     "comparison": {
-      "title": "会员特权说明",
+      "title": "会员特权",
       "checkIcon": "./assets/Image_-_check-circle-fill@2x.png",
       "checkIconMember": "./assets/Vector.png",
       "rows": [
         { "feature": "自动记账", "member": "无限制", "user": "每日1条" },
         { "feature": "无广告", "member": "check", "user": "check" },
-        { "feature": "会员福利", "member": "check", "user": "—" },
+        { "feature": "会员福利", "member": "check", "user": "check" },
         { "feature": "证券资产", "member": "无限制", "user": "1个" },
         { "feature": "负债账户", "member": "无限制", "user": "3个" },
         { "feature": "固定资产", "member": "无限制", "user": "3个" },
@@ -98,7 +98,7 @@
         { "feature": "信用卡", "member": "无限制", "user": "3个" },
         { "feature": "定期存款", "member": "无限制", "user": "3个" },
         { "feature": "日历报表", "member": "check", "user": "check" },
-        { "feature": "数据导出", "member": "check", "user": "—" },
+        { "feature": "数据导出", "member": "check", "user": "check" },
         { "feature": "多设备同步", "member": "check", "user": "check" }
       ]
     }
