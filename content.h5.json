@@ -122,9 +122,8 @@
     ],
     "legal": {
       "company": "广州时光在线网络科技有限公司",
-      "privacy": { "text": "隐私协议", "href": "#" },
+      "privacy": { "text": "隐私协议", "href": "https://www.firebook.tech/privacy-policy/" },
       "records": [
-        { "text": "粤公网安备44010602016234号", "href": "#" },
         { "text": "粤ICP备2024351621号", "href": "https://beian.miit.gov.cn/" }
       ]
     }

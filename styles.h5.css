@@ -198,6 +198,7 @@ html.platform-h5 .h5-section-title {
   font-weight: 700;
   color: #0f1623;
   line-height: 1.4;
+  padding-top: 24px;
 }
 
 html.platform-h5 .h5-section-subtitle {
@@ -222,14 +223,15 @@ html.platform-h5 .h5-membership .h5-section-subtitle {
 
 /* Features */
 html.platform-h5 .h5-features {
-  padding: 32px 16px;
-  /* background: linear-gradient(180deg, #eef4ff 0%, #f8faff 60%, #fff 100%); */
+  padding: 0 16px 16px;
   position: relative;
+  z-index: 20;
+  background-color: #f3faff;
+  margin-top: -90px;
 }
 
 html.platform-h5 .h5-feature-grid {
   position: relative;
-  top: -90px;
   z-index: 20;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -293,7 +295,7 @@ html.platform-h5 .h5-feature-item__title {
 
 /* Membership */
 html.platform-h5 .h5-membership {
-  padding: 32px 16px;
+  padding: 16px 16px 32px;
   background: #f7faff;
 }
 
