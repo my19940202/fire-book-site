@@ -226,7 +226,7 @@ html.platform-h5 .h5-features {
   padding: 0 16px 16px;
   position: relative;
   z-index: 20;
-  background-color: #f3faff;
+  /* background-color: #f3faff; */
   margin-top: -90px;
 }
 
