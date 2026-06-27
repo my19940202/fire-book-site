@@ -6,6 +6,18 @@
   <meta name="description" content="开启FIRE时光，让家庭财富成长的每一步" />
   <title>FIRE记账</title>
   <link rel="icon" href="./favicon.ico" sizes="any" />
+  <script>
+    (function () {
+      var narrow = window.matchMedia('(max-width: 768px)').matches;
+      var mobileUa = /Android|iPhone|iPod|Mobile/i.test(navigator.userAgent);
+      var platform = narrow || mobileUa ? 'h5' : 'web';
+      document.documentElement.classList.add('platform-' + platform);
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = platform === 'h5' ? './styles.h5.css' : './styles.web.css';
+      document.head.appendChild(link);
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -23,12 +35,11 @@
       },
     };
   </script>
-  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body class="bg-white text-navy antialiased">
   <div id="app">
     <p class="loading">加载中...</p>
   </div>
-  <script src="./app.js"></script>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
