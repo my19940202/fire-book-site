@@ -67,10 +67,12 @@ function initAnchorNav() {
   });
 }
 
+const HERO_AUTO_INTERVAL = 4000;
+
 function initHeroCarousel(images) {
-  const phoneImg = document.getElementById('hero-phone-img');
+  const track = document.getElementById('hero-phone-track');
   const dots = document.querySelectorAll('.hero-dot[data-index]');
-  if (!phoneImg || !dots.length || !images?.length) return;
+  if (!track || !dots.length || images.length <= 1) return;
 
   images.forEach((src) => {
     const preload = new Image();
@@ -78,7 +80,7 @@ function initHeroCarousel(images) {
   });
 
   let currentIndex = 0;
-  let animating = false;
+  let autoTimer = null;
 
   function setActiveDot(index) {
     dots.forEach((dot) => {
@@ -86,40 +88,32 @@ function initHeroCarousel(images) {
     });
   }
 
-  function switchTo(index) {
-    if (animating || index === currentIndex || !images[index]) return;
+  function goTo(index) {
+    if (!images[index] || index === currentIndex) return;
+    currentIndex = index;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    setActiveDot(index);
+  }
 
-    animating = true;
+  function next() {
+    goTo((currentIndex + 1) % images.length);
+  }
 
-    function onFadeOutEnd(e) {
-      if (e.propertyName !== 'opacity') return;
-      phoneImg.removeEventListener('transitionend', onFadeOutEnd);
-
-      phoneImg.src = images[index];
-      phoneImg.classList.remove('hero-phone-img--fading');
-
-      function onFadeInEnd(ev) {
-        if (ev.propertyName !== 'opacity') return;
-        phoneImg.removeEventListener('transitionend', onFadeInEnd);
-        currentIndex = index;
-        setActiveDot(index);
-        animating = false;
-      }
-
-      phoneImg.addEventListener('transitionend', onFadeInEnd);
-    }
-
-    phoneImg.addEventListener('transitionend', onFadeOutEnd);
-    phoneImg.classList.add('hero-phone-img--fading');
+  function resetAutoTimer() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = setInterval(next, HERO_AUTO_INTERVAL);
   }
 
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
       const index = Number(dot.dataset.index);
       if (Number.isNaN(index)) return;
-      switchTo(index);
+      goTo(index);
+      resetAutoTimer();
     });
   });
+
+  resetAutoTimer();
 }
 
 function initAppModal() {

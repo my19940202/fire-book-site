@@ -35,7 +35,6 @@ export function renderHeader(data) {
 
 export function renderHero(data) {
   const images = data.phoneImages ?? [];
-  const first = images[0] ?? '';
   const dots =
     images.length > 1
       ? images
@@ -44,6 +43,22 @@ export function renderHero(data) {
             <button type="button" class="hero-dot w-[36px] h-[4px] rounded-full${i === 0 ? ' hero-dot--active' : ''}" data-index="${i}"></button>`
           )
           .join('')
+      : '';
+
+  const phoneCarousel =
+    images.length > 0
+      ? `<div class="hero-phone-carousel" id="hero-phone-carousel">
+          <div class="hero-phone-track" id="hero-phone-track">
+            ${images
+              .map(
+                (src) => `
+              <div class="hero-phone-slide">
+                ${img(src, 'FIRE记账 App 界面', 'hero-phone-img')}
+              </div>`
+              )
+              .join('')}
+          </div>
+        </div>`
       : '';
 
   return `
@@ -70,7 +85,7 @@ export function renderHero(data) {
           </div>
         </div>
         <div class="hero-phone flex-1 flex justify-center items-end pb-8 relative">
-          ${first ? img(first, 'FIRE记账 App 界面', 'hero-phone-img', 'hero-phone-img') : ''}
+          ${phoneCarousel}
           ${dots ? `<div class="hero-dots absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 z-10">${dots}</div>` : ''}
         </div>
       </div>
@@ -225,7 +240,7 @@ export function renderFooter(data) {
 
   return `
     <footer class="site-footer left-0 w-full mx-auto min-h-[229px]">
-      <div class="footer-inner max-w-[1080px] mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+      <div class="footer-inner max-w-[1080px] mx-auto px-6 pt-[30px] pb-[40px] flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
         <div class="footer-contact text-center md:text-left">
           <p class="footer-contact-line">${data.wechat}</p>
           <p class="footer-contact-line">${data.business}</p>
