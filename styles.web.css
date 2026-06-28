@@ -200,22 +200,6 @@ body.modal-open {
   color: #0f1623;
 }
 
-@media (max-width: 480px) {
-  .app-modal__body {
-    padding: 2rem 1.25rem 1.5rem;
-  }
-
-  .app-modal__qr-wrap {
-    gap: 0.75rem;
-    padding: 1rem 0.75rem;
-  }
-
-  .app-modal__qr-card {
-    width: 104px;
-    height: 104px;
-  }
-}
-
 /* Hero */
 .hero-section {
   background: linear-gradient(135deg, #eef4ff 0%, #f5f0ff 40%, #e8f4fd 100%);
@@ -239,15 +223,9 @@ body.modal-open {
 }
 
 .hero-title-img {
-  height: 48px;
+  height: 56px;
   width: auto;
   object-fit: contain;
-}
-
-@media (min-width: 768px) {
-  .hero-title-img {
-    height: 56px;
-  }
 }
 
 .hero-phone-carousel {
@@ -334,11 +312,6 @@ body.modal-open {
   gap: 1.5rem;
 }
 
-@media (max-width: 640px) {
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .feature-card {
   display: flex;
@@ -401,17 +374,6 @@ body.modal-open {
   gap: 1.25rem;
 }
 
-@media (max-width: 900px) {
-  .plan-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .plan-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .plan-card {
   position: relative;
