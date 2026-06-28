@@ -1,3 +1,8 @@
+html,
+body {
+  font-family: "Source Han Sans CN", sans-serif;
+}
+
 /* Loading */
 .loading {
   display: flex;
@@ -87,8 +92,8 @@ body.modal-open {
 
 .app-modal__panel {
   position: relative;
-  width: 100%;
-  max-width: 420px;
+  width: 676px;
+  height: 498px;
   border-radius: 24px;
   background-color: #fff;
   background-repeat: no-repeat;
@@ -131,10 +136,10 @@ body.modal-open {
 }
 
 .app-modal__title {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #0f1623;
-  line-height: 1.4;
+  line-height: 1.6;
   margin-bottom: 1rem;
 }
 
@@ -151,6 +156,7 @@ body.modal-open {
   justify-content: center;
   gap: 1rem;
   padding: 1.25rem 1rem;
+  margin-top: 3rem;
 }
 
 .app-modal__qr-item {
@@ -164,8 +170,8 @@ body.modal-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
+  width: 176px;
+  height: 176px;
   background: #fff;
   border-radius: 12px;
   padding: 6px;
@@ -178,8 +184,7 @@ body.modal-open {
 }
 
 .app-modal__qr-label {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 1.25rem;
   color: #0f1623;
 }
 
@@ -237,6 +242,11 @@ body.modal-open {
   max-height: 520px;
   width: auto;
   object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.hero-phone-img--fading {
+  opacity: 0;
 }
 
 .download-btn {
@@ -381,7 +391,7 @@ body.modal-open {
   position: relative;
   background: #fff;
   border-radius: 2px;
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 1rem 2rem 1rem;
   text-align: center;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
 }
@@ -399,8 +409,7 @@ body.modal-open {
   border-color: #3b82f6;
   box-shadow: 0 4px 24px rgba(59, 130, 246, 0.15);
   background: url('./assets/Container_3@2x.png') no-repeat;
-  background-size: cover;
-  background-position-x: 4px;
+  background-size: 104% 100%;
   border-color: #ccdafe;
   border-style: solid;
   border-width: 0px 1px 1px 1px;
@@ -421,15 +430,15 @@ body.modal-open {
 }
 
 .plan-name {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: bold;
   color: #374151;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   text-align: left;
 }
 
 .plan-price {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: #374151;
   margin-bottom: 0;
   text-align: left;
@@ -438,32 +447,40 @@ body.modal-open {
 }
 
 .plan-sub-price {
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: #374151;
   margin-bottom: 0;
 }
 
 .plan-price span,
 .plan-sub-price span {
-  font-weight: 700;
-  font-size: 1.5rem;
+  font-weight: bold;
+  font-size: 1.75rem;
 }
 
 .plan-features {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin-top: 6px;
   text-align: left;
 }
 
 .plan-feature-item {
   font-size: 0.7rem;
-  color: #6b7280;
-  padding: 0.35rem 0;
+  color: #171A1D;
+  margin-top: 12px;
 }
 
 .plan-feature-item:first-child {
+  margin-top: 0;
   border-top: none;
+}
+
+.membership-section {
+  background-color: #f4faff;
+  background: url('./assets/Container@2x.png') no-repeat center center;
+  background-position-y: 20px;
+  background-size: 100% auto;
 }
 
 /* Comparison table */
@@ -547,8 +564,11 @@ body.modal-open {
 
 .footer-contact-line {
   font-size: 0.95rem;
-  color: #374151;
+  color: #000;
   margin-bottom: 0.5rem;
+}
+.footer-contact-line span {
+  color: #676e76;
 }
 
 .footer-qr-item {
@@ -572,9 +592,31 @@ body.modal-open {
   color: #4b5563;
 }
 
-.footer-copyright {
-  text-align: center;
-  font-size: 0.75rem;
-  color: #9ca3af;
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
   padding: 1rem 1.5rem 1.5rem;
+}
+
+.footer-legal-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #6a768d;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-sep {
+  color: #6a768d;
+}
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
 }

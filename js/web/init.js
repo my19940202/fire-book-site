@@ -67,18 +67,57 @@ function initAnchorNav() {
   });
 }
 
-function initHeroCarousel() {
+function initHeroCarousel(images) {
   const phoneImg = document.getElementById('hero-phone-img');
-  const dots = document.querySelectorAll('.hero-dot[data-phone-image]');
-  if (!phoneImg || !dots.length) return;
+  const dots = document.querySelectorAll('.hero-dot[data-index]');
+  if (!phoneImg || !dots.length || !images?.length) return;
+
+  images.forEach((src) => {
+    const preload = new Image();
+    preload.src = src;
+  });
+
+  let currentIndex = 0;
+  let animating = false;
+
+  function setActiveDot(index) {
+    dots.forEach((dot) => {
+      dot.classList.toggle('hero-dot--active', Number(dot.dataset.index) === index);
+    });
+  }
+
+  function switchTo(index) {
+    if (animating || index === currentIndex || !images[index]) return;
+
+    animating = true;
+
+    function onFadeOutEnd(e) {
+      if (e.propertyName !== 'opacity') return;
+      phoneImg.removeEventListener('transitionend', onFadeOutEnd);
+
+      phoneImg.src = images[index];
+      phoneImg.classList.remove('hero-phone-img--fading');
+
+      function onFadeInEnd(ev) {
+        if (ev.propertyName !== 'opacity') return;
+        phoneImg.removeEventListener('transitionend', onFadeInEnd);
+        currentIndex = index;
+        setActiveDot(index);
+        animating = false;
+      }
+
+      phoneImg.addEventListener('transitionend', onFadeInEnd);
+    }
+
+    phoneImg.addEventListener('transitionend', onFadeOutEnd);
+    phoneImg.classList.add('hero-phone-img--fading');
+  }
 
   dots.forEach((dot) => {
     dot.addEventListener('click', () => {
-      const src = dot.dataset.phoneImage;
-      if (!src) return;
-
-      phoneImg.src = src;
-      dots.forEach((d) => d.classList.toggle('hero-dot--active', d === dot));
+      const index = Number(dot.dataset.index);
+      if (Number.isNaN(index)) return;
+      switchTo(index);
     });
   });
 }
@@ -131,6 +170,6 @@ export async function init(app) {
   ].join('');
 
   initAnchorNav();
-  initHeroCarousel();
+  initHeroCarousel(data.hero.phoneImages ?? []);
   initAppModal();
 }

@@ -42,7 +42,7 @@ pnpm dev   # wrangler dev
 |------|------|------|
 | `meta` | `title`, `description` | 页面标题与 SEO 描述 |
 | `header` | `icon`, `logoText`, `tabs[]`, `suffixBtn`, `modal` | 顶部导航与下载弹窗 |
-| `hero` | `icon`, `title`, `subtitle`, `androidBtn`, `iosBtn`, `phoneImage` | 首屏 Banner |
+| `hero` | `icon`, `title`, `subtitle`, `androidBtn`, `iosBtn`, `phoneImages` | 首屏 Banner |
 | `feature` | `title`, `subtitle`, `items[]` | 产品功能（8 项） |
 | `membership` | `title`, `subtitle`, `plans[]`, `comparison` | 会员定价 + 特权对比表 |
 | `footer` | `wechat`, `business`, `qrCodes[]`, `copyright` | 页脚 |

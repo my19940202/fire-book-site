@@ -1,5 +1,10 @@
 /* H5 platform styles — scoped under html.platform-h5 */
 
+html.platform-h5,
+html.platform-h5 body {
+  font-family: "Source Han Sans CN", sans-serif;
+}
+
 html.platform-h5 {
   scroll-behavior: smooth;
 }
@@ -326,8 +331,7 @@ html.platform-h5 .plan-card--popular {
   border-color: #3b82f6;
   box-shadow: 0 4px 24px rgba(59, 130, 246, 0.15);
   background: url('./assets/Container_3@2x.png') no-repeat;
-  background-size: cover;
-  background-position-x: 4px;
+  background-size: 104% 100%;
   border-color: #ccdafe;
   border-style: solid;
   border-width: 0 1px 1px 1px;
@@ -385,19 +389,15 @@ html.platform-h5 .plan-sub-price span {
 html.platform-h5 .plan-features {
   list-style: none;
   padding: 0;
-  margin: 0.75rem 0 0;
+  margin: 0.3rem 0 0;
   text-align: left;
 }
 
 html.platform-h5 .plan-feature-item {
-  font-size: 0.625rem;
-  color: #6b7280;
-  padding: 0.25rem 0;
+  font-size: 8px;
+  color: #171A1D;
+  padding: 0.2rem 0;
   line-height: 1.4;
-}
-
-html.platform-h5 .plan-feature-item:first-child {
-  border-top: none;
 }
 
 /* Comparison (mobile column layout) */

@@ -37,8 +37,10 @@
       "icon": "./assets/Frame_2@2x.png",
       "href": "https://apps.apple.com/cn/app/fire%E8%AE%B0%E8%B4%A6%E6%9C%AC/id6742338689"
     },
-    "phoneImage": "./assets/Iphone_Image@2x.png",
-    "phoneImage2": "./assets/Iphone_Image_pop@2x.png"
+    "phoneImages": [
+      "./assets/Iphone_Image@2x.png",
+      "./assets/Iphone_Image_pop@2x.png"
+    ]
   },
   "feature": {
     "id": "feature",
@@ -143,28 +145,34 @@
       "checkIconMember": "./assets/Vector.png",
       "headers": ["功能权益", "FIRE会员", "普通用户"],
       "rows": [
-        { "feature": "自动记账", "member": "无限制", "user": "每日1条" },
-        { "feature": "无广告", "member": "check", "user": "check" },
-        { "feature": "会员福利", "member": "check", "user": "check" },
-        { "feature": "证券资产", "member": "无限制", "user": "1个" },
-        { "feature": "负债账户", "member": "无限制", "user": "3个" },
-        { "feature": "固定资产", "member": "无限制", "user": "3个" },
-        { "feature": "现金账户", "member": "无限制", "user": "5个" },
-        { "feature": "信用卡", "member": "无限制", "user": "3个" },
-        { "feature": "定期存款", "member": "无限制", "user": "3个" },
-        { "feature": "日历报表", "member": "check", "user": "check" },
-        { "feature": "数据导出", "member": "check", "user": "check" },
-        { "feature": "多设备同步", "member": "check", "user": "check" }
+        { "feature": "自动记账", "desc": "AI记账、账单一键导入，智能识别分类", "member": "无限制", "user": "每日5条" },
+        { "feature": "无广告", "desc": "沉浸式记账体验，不受任何广告打扰", "member": "check", "user": "check" },
+        { "feature": "会员福利", "desc": "专属会员权益，不定期发放惊喜福利", "member": "check", "user": "check" },
+        { "feature": "证券资产", "desc": "股票基金实时行情，持仓盈亏一目了然", "member": "无限制", "user": "5条" },
+        { "feature": "其他资产", "desc": "房产车辆数码产品，统统纳入资产管理", "member": "无限制", "user": "5" },
+        { "feature": "自定义产品", "desc": "灵活创建专属资产类别，满足个性化需求", "member": "无限制", "user": "5个" },
+        { "feature": "现金账户", "desc": "多币种现金账户管理，余额随时可查", "member": "无限制", "user": "3张" },
+        { "feature": "信用卡", "desc": "信用卡账单自动同步，还款日智能提醒", "member": "无限制", "user": "3条" },
+        { "feature": "负债条款", "desc": "房贷车贷网络贷，还款计划统一管理", "member": "无限制", "user": "3条" },
+        { "feature": "定期存款", "desc": "本金利率自动计算，到期本息一目了然", "member": "无限制", "user": "3条" },
+        { "feature": "基金定投", "desc": "定投计划一键设置，自动扣款省心省力", "member": "无限制", "user": "3条" }
       ]
     }
   },
   "footer": {
-    "wechat": "微信公众号: fire记账",
-    "business": "商务合作: fire记账",
+    "wechat": "微信公众号: <span>fire记账</span>",
+    "business": "商务合作: <span>fire记账</span>",
     "qrCodes": [
       { "label": "专属客服一", "image": "./assets/kefu-1.png" },
       { "label": "专属客服二", "image": "./assets/kefu-2.png" }
     ],
-    "copyright": "© 2026 FIRE记账 版权所有"
+    "legal": {
+      "company": "广州时光在线网络科技有限公司",
+      "privacy": { "text": "隐私协议", "href": "https://www.firebook.tech/privacy-policy/" },
+      "records": [
+        { "text": "粤公网安备44010602016234号", "href": "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602016234" },
+        { "text": "粤ICP备2024351621号", "href": "http://beian.miit.gov.cn/" }
+      ]
+    }
   }
 }

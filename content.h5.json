@@ -59,28 +59,28 @@
         "price": "免费",
         "subPrice": null,
         "badge": null,
-        "features": ["基础记账功能齐全", "满足个人轻量使用"]
+        "features": ["基础记账功能齐全，覆盖日常收支管理", "满足个人记账基本需求，适合轻量使用"]
       },
       {
         "name": "月度会员",
         "price": "<span>12</span> 元/月",
         "subPrice": null,
         "badge": "最受欢迎版本",
-        "features": ["解锁全部高级特权", "所有模块无限制使用"]
+        "features": ["解锁全部高级特权，所有模块无限制使用", "享受完整记账体验，助力全面理财管理"]
       },
       {
-        "name": "年度会员/三年会员",
+        "name": "年度/三年会员",
         "price": "<span>58</span> 元/年",
         "subPrice": "<span>138</span> 元/三年",
         "badge": null,
-        "features": ["按年购买更优惠", "完整记账体验"]
+        "features": ["按年购买更优惠~", "享受完整记账体验，助力全面理财管理"]
       },
       {
         "name": "永久会员",
         "price": "<span>218</span> 元/终身",
         "subPrice": null,
         "badge": null,
-        "features": ["限时优惠开放中", "抓住首发机会"]
+        "features": ["限时优惠开放中，早买早省", "前期推广特惠，抓住首发机会"]
       }
     ],
     "comparison": {
@@ -124,7 +124,8 @@
       "company": "广州时光在线网络科技有限公司",
       "privacy": { "text": "隐私协议", "href": "https://www.firebook.tech/privacy-policy/" },
       "records": [
-        { "text": "粤ICP备2024351621号", "href": "https://beian.miit.gov.cn/" }
+        { "text": "粤公网安备44010602016234号", "href": "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44010602016234" },
+        { "text": "粤ICP备2024351621号", "href": "http://beian.miit.gov.cn/" }
       ]
     }
   }

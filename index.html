@@ -6,6 +6,7 @@
   <meta name="description" content="开启FIRE时光，让家庭财富成长的每一步" />
   <title>FIRE记账</title>
   <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="./fonts.css" />
   <script>
     (function () {
       var narrow = window.matchMedia('(max-width: 768px)').matches;
@@ -23,6 +24,9 @@
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['"Source Han Sans CN"', 'sans-serif'],
+          },
           colors: {
             brand: {
               DEFAULT: '#3B82F6',

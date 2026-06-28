@@ -34,8 +34,20 @@ export function renderHeader(data) {
 }
 
 export function renderHero(data) {
+  const images = data.phoneImages ?? [];
+  const first = images[0] ?? '';
+  const dots =
+    images.length > 1
+      ? images
+          .map(
+            (_, i) => `
+            <button type="button" class="hero-dot w-[36px] h-[4px] rounded-full${i === 0 ? ' hero-dot--active' : ''}" data-index="${i}"></button>`
+          )
+          .join('')
+      : '';
+
   return `
-    <section id="hero" class="hero-section left-0 w-full max-w-[1920px] mx-auto h-[640.2px] relative overflow-hidden">
+    <section id="hero" class="hero-section left-0 w-full mx-auto h-[640.2px] relative overflow-hidden">
       <div class="hero-inner max-w-[1080px] mx-auto px-6 h-full flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
         <div class="hero-content flex-1 pt-8 md:pt-0">
           <div class="hero-title-row flex items-center gap-4 md:gap-6 mb-8">
@@ -58,11 +70,8 @@ export function renderHero(data) {
           </div>
         </div>
         <div class="hero-phone flex-1 flex justify-center items-end pb-8 relative">
-          ${img(data.phoneImage, 'FIRE记账 App 界面', 'hero-phone-img', 'hero-phone-img')}
-          <div class="hero-dots absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            <button type="button" class="hero-dot w-[36px] h-[4px] rounded-full hero-dot--active" data-phone-image="${escapeHtml(data.phoneImage)}" aria-label="展示界面一"></button>
-            <button type="button" class="hero-dot w-[36px] h-[4px] rounded-full" data-phone-image="${escapeHtml(data.phoneImage2)}" aria-label="展示界面二"></button>
-          </div>
+          ${first ? img(first, 'FIRE记账 App 界面', 'hero-phone-img', 'hero-phone-img') : ''}
+          ${dots ? `<div class="hero-dots absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-2 z-10">${dots}</div>` : ''}
         </div>
       </div>
     </section>`;
@@ -87,7 +96,7 @@ export function renderFeature(data) {
     .join('');
 
   return `
-    <section id="${escapeHtml(data.id)}" class="feature-section py-20 px-6">
+    <section id="${escapeHtml(data.id)}" class="feature-section pt-20">
       <div class="max-w-[1080px] mx-auto">
         <div class="text-center mb-14">
           <h2 class="section-title">${escapeHtml(data.title)} </h2>
@@ -139,9 +148,9 @@ export function renderMembership(data) {
     .join('');
 
   return `
-    <section id="${escapeHtml(data.id)}" class="membership-section py-20 px-6 bg-brand-light/30">
+    <section id="${escapeHtml(data.id)}" class="membership-section py-20">
       <div class="max-w-[1080px] mx-auto">
-        <div class="text-center mb-14">
+        <div class="text-center mb-24">
           <h2 class="section-title">${escapeHtml(data.title)}</h2>
           <p class="section-subtitle mt-4 max-w-2xl mx-auto">${escapeHtml(data.subtitle)}</p>
         </div>
@@ -182,7 +191,7 @@ export function renderAppModal(modal) {
     <div id="app-modal" class="app-modal" hidden aria-hidden="true">
       <div class="app-modal__backdrop" data-modal-close></div>
       <div class="app-modal__panel"${bgStyle} role="dialog" aria-modal="true" aria-labelledby="app-modal-title" tabindex="-1">
-        <button type="button" class="app-modal__close" data-modal-close aria-label="关闭">
+        <button type="button" class="app-modal__close" data-modal-close>
           ${img('./assets/close-btn.png', '关闭', 'app-modal__close-icon')}
         </button>
         <div class="app-modal__body">
@@ -191,6 +200,13 @@ export function renderAppModal(modal) {
         </div>
       </div>
     </div>`;
+}
+
+function renderFooterLink(item) {
+  if (item.href) {
+    return `<a href="${escapeHtml(item.href)}" class="footer-link">${escapeHtml(item.text)}</a>`;
+  }
+  return escapeHtml(item.text);
 }
 
 export function renderFooter(data) {
@@ -204,15 +220,26 @@ export function renderFooter(data) {
     )
     .join('');
 
+  const privacy = renderFooterLink(data.legal.privacy);
+  const records = data.legal.records.map(renderFooterLink).join('<span class="footer-sep">|</span>');
+
   return `
-    <footer class="site-footer left-0 w-full max-w-[1920px] mx-auto min-h-[229px]">
+    <footer class="site-footer left-0 w-full mx-auto min-h-[229px]">
       <div class="footer-inner max-w-[1080px] mx-auto px-6 py-10 flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
         <div class="footer-contact text-center md:text-left">
-          <p class="footer-contact-line">${escapeHtml(data.wechat)}</p>
-          <p class="footer-contact-line">${escapeHtml(data.business)}</p>
+          <p class="footer-contact-line">${data.wechat}</p>
+          <p class="footer-contact-line">${data.business}</p>
         </div>
         <div class="footer-qr-group flex gap-8">${qrCodes}</div>
       </div>
-      <p class="footer-copyright">${escapeHtml(data.copyright)}</p>
+      <div class="footer-legal">
+        <p class="footer-legal-line">
+          <span>${escapeHtml(data.legal.company)}</span>
+          <span class="footer-sep">|</span>
+          ${records}
+          <span class="footer-sep">|</span>
+          ${privacy}
+        </p>
+      </div>
     </footer>`;
 }
