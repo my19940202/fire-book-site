@@ -74,7 +74,7 @@ html.platform-h5 .h5-header__cta:active {
 
 /* Hero */
 html.platform-h5 .h5-hero {
-  background: linear-gradient(180deg, #eef4ff 0%, #f8faff 60%, #fff 100%);
+  background: linear-gradient(135deg, #efeefd 0%, #eae7fc 40%, #f7f7fd 100%);
   padding: 24px 16px 16px;
   overflow: hidden;
 }
